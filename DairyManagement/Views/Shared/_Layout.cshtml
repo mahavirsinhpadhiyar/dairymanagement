@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrapdatatablecss")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Dairy Management", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Milk Details", "Index", "VendorMilk")</li>
+                    <li>@Html.ActionLink("Add Milk", "Create", "VendorMilk")</li>
+                    <li>@Html.ActionLink("Vendors", "Index", "VendorInfoes")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Accounts", "ListAccounts", "Accounts")</li>
+                    <li>
+                        @if (!String.IsNullOrEmpty(Convert.ToString(Session["isuserloggedin"])) && Convert.ToBoolean(Session["isuserloggedin"]))
+                        {
+                            <form method="post" action="/Login/Logoff">
+                                <input type="submit" value="Logoff" style="margin-top: 13px"/>
+                            </form>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Dairy Management<br />Developed By Mahavirsinh Padhiyar (8866115121)</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $('.dairyDynamicDatatable').DataTable({
+        });
+    </script>
+</body>
+</html>

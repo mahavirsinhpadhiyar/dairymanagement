@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Table";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="divPartialAddRow"></table>
+
+<input type="button" name="name" value="addRow" id="btnAddRow" />
+@section scripts{
+
+    <script>
+        $(function () {
+            var i = 1;
+            $('#btnAddRow').on('click', function () {
+
+                $.ajax({
+                    url: '/Home/partialAddRow/',
+                    data: { i: i },
+                    success: function (data) {
+                        $("#divPartialAddRow").append(data);
+                        i++;
+
+                        //find the newly added row to bind click event to new img
+                        $("#divPartialAddRow tr").last().find("img").click(
+                            function () {
+                                //  $(this).parent().prev().find("input").val($(this).attr("id"));
+                                $(this).parent().prev().find("input").attr("id", $(this).attr("id"));
+                            }
+                        )
+
+                    }
+                })
+
+            })
+        })
+    </script>
+}

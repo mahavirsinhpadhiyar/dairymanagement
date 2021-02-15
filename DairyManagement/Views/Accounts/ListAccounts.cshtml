@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DairyManagement.ViewModels.Accounts.AccountsVMs>
+
+@{
+    ViewBag.Title = "ListAccounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Account List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Index")
+</p>
+<table class="table table-striped table-bordered dt-responsive dairyDynamicDatatable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OldStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TodayMilk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPurchase)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalSell)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailableStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RealStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockDifference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountDateTime)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OldStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TodayMilk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPurchase)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalSell)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvailableStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RealStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockDifference)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountDateTime)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AccountId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.AccountId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.AccountId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
