@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{565A3704-F5ED-4A5A-BCB6-F086ACB57FF1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DairyManagement</RootNamespace>
+    <AssemblyName>DairyManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\HandleExceptionController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\VendorInfoesController.cs" />
+    <Compile Include="Controllers\VendorMilkController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\CustomAuthorize.cs" />
+    <Compile Include="Models\LiveDBEDMX\AccountDetail.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\AccountDetailsLastRealStock.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\AccountSP.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\DairyManagementLive.Context.cs">
+      <DependentUpon>DairyManagementLive.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\DairyManagementLive.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\DairyManagementLive.Designer.cs">
+      <DependentUpon>DairyManagementLive.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\EmployeeDetail.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\EmployeeVaaraDetail.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\MilkType.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\UserInfo.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\VendorInfo.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LiveDBEDMX\VendorMilkInfo.cs">
+      <DependentUpon>DairyManagementLive.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Accounts\AccountsVM.cs" />
+    <Compile Include="ViewModels\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModels\VendorMilk\VendorMilkViewModel.cs" />
+    <Compile Include="ViewModels\Vendor\VendorListViewModel.cs" />
+    <Compile Include="ViewModels\Vendor\VendorViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\propeller-roboto.css" />
+    <Content Include="assets\css\propeller.css" />
+    <Content Include="assets\css\propeller.min.css" />
+    <Content Include="assets\fonts\roboto\Roboto-Black-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-BlackItalic-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-Bold-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-BoldItalic-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-Italic-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-Light-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-LightItalic-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-Medium-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-MediumItalic-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-Regular-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-Thin-webfont.svg" />
+    <Content Include="assets\fonts\roboto\Roboto-ThinItalic-webfont.svg" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Bold-webfont.svg" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-BoldItalic-webfont.svg" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Italic-webfont.svg" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Light-webfont.svg" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-LightItalic-webfont.svg" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Regular-webfont.svg" />
+    <Content Include="assets\images\avatar-icon-40x40.png" />
+    <Content Include="assets\images\banner-propeller-logo.png" />
+    <Content Include="assets\images\favicon.ico" />
+    <Content Include="assets\images\profile-pic.png" />
+    <Content Include="assets\images\propeller-logo.png" />
+    <Content Include="assets\images\Propeller_FB_Covers.jpg" />
+    <Content Include="assets\images\Twitter_Open_Graph.jpg" />
+    <Content Include="assets\js\bootstrap.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\jquery-1.12.2.min.js" />
+    <Content Include="assets\js\jquery.js" />
+    <Content Include="assets\js\propeller.js" />
+    <Content Include="assets\js\propeller.min.js" />
+    <Content Include="components\accordion\accordion.html" />
+    <Content Include="components\accordion\css\accordion.css" />
+    <Content Include="components\accordion\js\accordion.js" />
+    <Content Include="components\alert\alerts.html" />
+    <Content Include="components\alert\css\alert.css" />
+    <Content Include="components\alert\js\alert.js" />
+    <Content Include="components\badge\badge.html" />
+    <Content Include="components\badge\css\badge.css" />
+    <Content Include="components\button\button.html" />
+    <Content Include="components\button\css\button.css" />
+    <Content Include="components\button\js\ripple-effect.js" />
+    <Content Include="components\card\card.html" />
+    <Content Include="components\card\css\card.css" />
+    <Content Include="components\card\js\jquery.masonry.min.js" />
+    <Content Include="components\checkbox\checkbox.html" />
+    <Content Include="components\checkbox\css\checkbox.css" />
+    <Content Include="components\checkbox\css\_notes\dwsync.xml" />
+    <Content Include="components\checkbox\js\checkbox.js" />
+    <Content Include="components\custom-scrollbar\css\jquery.mCustomScrollbar.css" />
+    <Content Include="components\custom-scrollbar\css\mCSB_buttons.png" />
+    <Content Include="components\custom-scrollbar\css\pmd-scrollbar.css" />
+    <Content Include="components\custom-scrollbar\custom-scroll-npm.html" />
+    <Content Include="components\custom-scrollbar\custom-scroll.html" />
+    <Content Include="components\custom-scrollbar\js\jquery.mCustomScrollbar.js" />
+    <Content Include="components\data-table\css\pmd-datatable.css" />
+    <Content Include="components\data-table\data-table-npm.html" />
+    <Content Include="components\data-table\data-table.html" />
+    <Content Include="components\datetimepicker\css\bootstrap-datetimepicker.css" />
+    <Content Include="components\datetimepicker\css\pmd-datetimepicker.css" />
+    <Content Include="components\datetimepicker\datetimepicker-npm.html" />
+    <Content Include="components\datetimepicker\datetimepicker.html" />
+    <Content Include="components\datetimepicker\js\bootstrap-datetimepicker.js" />
+    <Content Include="components\datetimepicker\js\moment-with-locales.js" />
+    <Content Include="components\dropdown\css\dropdown.css" />
+    <Content Include="components\dropdown\dropdown.html" />
+    <Content Include="components\dropdown\js\dropdown.js" />
+    <Content Include="components\file-upload\css\image-upload.css" />
+    <Content Include="components\file-upload\css\upload-file.css" />
+    <Content Include="components\file-upload\js\upload-image.js" />
+    <Content Include="components\floating-action-button\css\floating-action-button.css" />
+    <Content Include="components\floating-action-button\floating-action-button-pages\floating-action-button-iframe.html" />
+    <Content Include="components\floating-action-button\floating-action-button.html" />
+    <Content Include="components\form\form.html" />
+    <Content Include="components\global\js\global.js" />
+    <Content Include="components\icons\css\google-icons.css" />
+    <Content Include="components\icons\propeller-icons.html" />
+    <Content Include="components\index.php" />
+    <Content Include="components\list\css\list.css" />
+    <Content Include="components\list\img\40x40.png" />
+    <Content Include="components\list\index.html" />
+    <Content Include="components\modal\css\modal.css" />
+    <Content Include="components\modal\modal.html" />
+    <Content Include="components\navbar\css\navbar.css" />
+    <Content Include="components\navbar\js\navbar.js" />
+    <Content Include="components\navbar\navbar-pages\basic-menu-page.html" />
+    <Content Include="components\navbar\navbar-pages\bootstrap-basic-menu-page.html" />
+    <Content Include="components\navbar\navbar-pages\collapsible-menu-page.html" />
+    <Content Include="components\navbar\navbar-pages\placement-menu-page.html" />
+    <Content Include="components\navbar\navbar-pages\search-menu-page.html" />
+    <Content Include="components\navbar\navbar-pages\sidebar-menu-page.html" />
+    <Content Include="components\navbar\navbar.html" />
+    <Content Include="components\pagination\css\pagination.css" />
+    <Content Include="components\pagination\css\_notes\dwsync.xml" />
+    <Content Include="components\popover\css\popover.css" />
+    <Content Include="components\popover\js\popover.js" />
+    <Content Include="components\popover\popover.html" />
+    <Content Include="components\progressbar\css\progressbar.css" />
+    <Content Include="components\progressbar\progressbar.html" />
+    <Content Include="components\radio\css\radio.css" />
+    <Content Include="components\radio\js\radio.js" />
+    <Content Include="components\radio\radio.html" />
+    <Content Include="components\range-slider\css\jquery.nouislider.css" />
+    <Content Include="components\range-slider\css\nouislider.min.css" />
+    <Content Include="components\range-slider\css\range-slider.css" />
+    <Content Include="components\range-slider\js\jquery.nouislider.min.js" />
+    <Content Include="components\range-slider\js\nouislider.js" />
+    <Content Include="components\range-slider\js\wNumb.js" />
+    <Content Include="components\range-slider\range-slider-npm.html" />
+    <Content Include="components\range-slider\range-slider.html" />
+    <Content Include="components\select2\css\pmd-select2.css" />
+    <Content Include="components\select2\css\select2-bootstrap.css" />
+    <Content Include="components\select2\css\select2.css" />
+    <Content Include="components\select2\css\select2.min.css" />
+    <Content Include="components\select2\js\pmd-select2.js" />
+    <Content Include="components\select2\js\select2.full.js" />
+    <Content Include="components\select2\select2-npm.html" />
+    <Content Include="components\select2\select2.html" />
+    <Content Include="components\shadow\css\shadow.css" />
+    <Content Include="components\shadow\shadow.html" />
+    <Content Include="components\sidebar\css\sidebar.css" />
+    <Content Include="components\sidebar\js\sidebar.js" />
+    <Content Include="components\sidebar\sidebar-pages\basic-sidebar-page.html" />
+    <Content Include="components\sidebar\sidebar-pages\fixed-sidebar-page.html" />
+    <Content Include="components\sidebar\sidebar-pages\open-sidebar-page.html" />
+    <Content Include="components\sidebar\sidebar-pages\right-sidebar-page.html" />
+    <Content Include="components\sidebar\sidebar.html" />
+    <Content Include="components\table\css\table.css" />
+    <Content Include="components\table\table.html" />
+    <Content Include="components\tab\css\tab.css" />
+    <Content Include="components\tab\js\tab-scrollable.js" />
+    <Content Include="components\tab\tabs.html" />
+    <Content Include="components\textfield\css\textfield.css" />
+    <Content Include="components\textfield\js\textfield.js" />
+    <Content Include="components\textfield\textfield.html" />
+    <Content Include="components\toggle-switch\css\toggle-switch.css" />
+    <Content Include="components\toggle-switch\toggle-switch.html" />
+    <Content Include="components\tooltip\css\tooltip.css" />
+    <Content Include="components\tooltip\css\_notes\dwsync.xml" />
+    <Content Include="components\tooltip\tooltip.html" />
+    <Content Include="components\typography\css\typography.css" />
+    <Content Include="components\typography\typography.html" />
+    <Content Include="components\utilities\css\utilities.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstraplogin.min.css" />
+    <Content Include="Content\dataTables.bootstrap.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\responsive.bootstrap.min.css" />
+    <Content Include="Content\signin.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Models\LiveDBEDMX\DairyManagementLive.Context.tt">
+      <DependentUpon>DairyManagementLive.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DairyManagementLive.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LiveDBEDMX\DairyManagementLive.edmx.diagram">
+      <DependentUpon>DairyManagementLive.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\LiveDBEDMX\DairyManagementLive.tt">
+      <DependentUpon>DairyManagementLive.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DairyManagementLive.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="assets\css\propeller.min.css.map" />
+    <Content Include="assets\fonts\roboto\Roboto-Black-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-Black-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-Black-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-BlackItalic-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-BlackItalic-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-BlackItalic-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-Bold-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-Bold-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-Bold-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-BoldItalic-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-BoldItalic-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-BoldItalic-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-Italic-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-Italic-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-Italic-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-Light-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-Light-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-Light-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-LightItalic-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-LightItalic-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-LightItalic-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-Medium-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-Medium-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-Medium-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-MediumItalic-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-MediumItalic-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-MediumItalic-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-Regular-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-Regular-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-Regular-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-Thin-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-Thin-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-Thin-webfont.woff" />
+    <Content Include="assets\fonts\roboto\Roboto-ThinItalic-webfont.eot" />
+    <Content Include="assets\fonts\roboto\Roboto-ThinItalic-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\Roboto-ThinItalic-webfont.woff" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Bold-webfont.eot" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Bold-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Bold-webfont.woff" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-BoldItalic-webfont.eot" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-BoldItalic-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-BoldItalic-webfont.woff" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Italic-webfont.eot" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Italic-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Italic-webfont.woff" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Light-webfont.eot" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Light-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Light-webfont.woff" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-LightItalic-webfont.eot" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-LightItalic-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-LightItalic-webfont.woff" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Regular-webfont.eot" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Regular-webfont.ttf" />
+    <Content Include="assets\fonts\roboto\RobotoCondensed-Regular-webfont.woff" />
+    <Content Include="assets\js\propeller.js.map" />
+    <Content Include="components\custom-scrollbar\package.json" />
+    <Content Include="components\custom-scrollbar\README.md" />
+    <Content Include="components\data-table\package.json" />
+    <Content Include="components\data-table\README.md" />
+    <Content Include="components\datetimepicker\package.json" />
+    <Content Include="components\datetimepicker\README.md" />
+    <Content Include="components\range-slider\package.json" />
+    <Content Include="components\range-slider\README.md" />
+    <Content Include="components\select2\package.json" />
+    <Content Include="components\select2\README.md" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\managedairy - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\managedairy - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\coreui.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\PageScripts\Account.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\util.js" />
+    <Content Include="themes\css\propeller-admin.css" />
+    <Content Include="themes\css\propeller-theme.css" />
+    <Content Include="themes\images\avtar-b.jpg" />
+    <Content Include="themes\images\child-table-collapse.svg" />
+    <Content Include="themes\images\child-table-expand.svg" />
+    <Content Include="themes\images\favicon.ico" />
+    <Content Include="themes\images\grow-up-arrow.png" />
+    <Content Include="themes\images\logo-icon.png" />
+    <Content Include="themes\images\profile-1.png" />
+    <Content Include="themes\images\profile-2.png" />
+    <Content Include="themes\images\profile-3.png" />
+    <Content Include="themes\images\profile-4.png" />
+    <Content Include="themes\images\propeller-bg.jpg" />
+    <Content Include="themes\images\Propeller-Logo-Inverse.png" />
+    <Content Include="themes\images\propeller-logo.png" />
+    <Content Include="themes\images\user-baykam.jpg" />
+    <Content Include="themes\images\user-icon.png" />
+    <Content Include="themes\images\user-jigen.jpg" />
+    <Content Include="themes\images\user-john.jpg" />
+    <Content Include="themes\images\user-keel.jpg" />
+    <Content Include="themes\images\user-prathit.jpg" />
+    <Content Include="themes\images\user-sergey.jpg" />
+    <Content Include="themes\images\user-sinisa.jpg" />
+    <Content Include="themes\images\user-stephen.jpg" />
+    <Content Include="themes\images\user-valerii.jpg" />
+    <Content Include="themes\js\circles.js" />
+    <Content Include="themes\js\circles.min.js" />
+    <Content Include="themes\js\highcharts-more.js" />
+    <Content Include="themes\js\highcharts.js" />
+    <Content Include="themes\js\moment.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\VendorInfoes\Create.cshtml" />
+    <Content Include="Views\VendorInfoes\Delete.cshtml" />
+    <Content Include="Views\VendorInfoes\Details.cshtml" />
+    <Content Include="Views\VendorInfoes\Edit.cshtml" />
+    <Content Include="Views\VendorInfoes\Index.cshtml" />
+    <Content Include="Views\VendorMilk\Create.cshtml" />
+    <Content Include="Views\VendorMilk\Delete.cshtml" />
+    <Content Include="Views\VendorMilk\Details.cshtml" />
+    <Content Include="Views\VendorMilk\Edit.cshtml" />
+    <Content Include="Views\VendorMilk\Index.cshtml" />
+    <Content Include="Views\Shared\_NewLayout.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Home\partialAddRow.cshtml" />
+    <Content Include="Views\Home\Table.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Accounts\_AddSP.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Accounts\ListAccounts.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="components\data-table\extensions\Buttons\css\" />
+    <Folder Include="components\floating-action-button\js\" />
+    <Folder Include="components\get-started\" />
+    <Folder Include="components\toggle-switch\js\" />
+    <Folder Include="components\tooltip\js\" />
+    <Folder Include="Models\LocalDBEDMX\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\LiveDBEDMX\DairyManagementLive.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DairyManagementLive.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50579</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50579/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

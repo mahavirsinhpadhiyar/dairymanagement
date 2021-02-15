@@ -1,0 +1,831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dairymanagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OldStock" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="TodayMilk" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="TotalPurchase" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="TotalSell" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="AvailableStock" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="RealStock" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="StockDifference" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="VendorId" Type="int" />
+          <Property Name="AccountDateTime" Type="datetime" />
+          <Property Name="TodayMilkNote" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalPurchaseNote" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalSellNote" Type="nvarchar" MaxLength="50" />
+          <Property Name="AvailableStockNote" Type="nvarchar" MaxLength="50" />
+          <Property Name="RealStockNote" Type="nvarchar" MaxLength="50" />
+          <Property Name="StockDifferenceNote" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConsiderOldStock" Type="bit" />
+        </EntityType>
+        <EntityType Name="AccountDetailsLastRealStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RealStock" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="AccountDate" Type="datetime" />
+          <Property Name="AccountId" Type="int" />
+        </EntityType>
+        <EntityType Name="AccountSPs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountId" Type="int" />
+          <Property Name="SPValue" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="SPNote" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeeDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmployeeVaaraDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="Vaara" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="VaaraDateTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MilkTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MilkType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VendorInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VendorMilkInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorId" Type="int" />
+          <Property Name="MilkTypeId" Type="int" />
+          <Property Name="MilkValue" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="FatValue" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_AccountDetails_VendorInfo">
+          <End Role="VendorInfo" Type="Self.VendorInfo" Multiplicity="0..1" />
+          <End Role="AccountDetails" Type="Self.AccountDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountDetails">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountDetailsLastRealStock_EmployeeDetails">
+          <End Role="EmployeeDetails" Type="Self.EmployeeDetails" Multiplicity="0..1" />
+          <End Role="AccountDetailsLastRealStock" Type="Self.AccountDetailsLastRealStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountDetailsLastRealStock">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountSPs_AccountDetails">
+          <End Role="AccountDetails" Type="Self.AccountDetails" Multiplicity="0..1" />
+          <End Role="AccountSPs" Type="Self.AccountSPs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountSPs">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVaaraDetails_EmployeeDetails">
+          <End Role="EmployeeDetails" Type="Self.EmployeeDetails" Multiplicity="0..1" />
+          <End Role="EmployeeVaaraDetails" Type="Self.EmployeeVaaraDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeVaaraDetails">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MilkTypes_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="MilkTypes" Type="Self.MilkTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MilkTypes">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MilkTypes_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="MilkTypes" Type="Self.MilkTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MilkTypes">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorInfo_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="VendorInfo" Type="Self.VendorInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorInfo">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorInfo_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="VendorInfo" Type="Self.VendorInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorInfo">
+              <PropertyRef Name="UpdateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorMilkInfo_MilkTypes">
+          <End Role="MilkTypes" Type="Self.MilkTypes" Multiplicity="0..1" />
+          <End Role="VendorMilkInfo" Type="Self.VendorMilkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MilkTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorMilkInfo">
+              <PropertyRef Name="MilkTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorMilkInfo_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="VendorMilkInfo" Type="Self.VendorMilkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorMilkInfo">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorMilkInfo_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="VendorMilkInfo" Type="Self.VendorMilkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorMilkInfo">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorMilkInfo_VendorInfo">
+          <End Role="VendorInfo" Type="Self.VendorInfo" Multiplicity="0..1" />
+          <End Role="VendorMilkInfo" Type="Self.VendorMilkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorMilkInfo">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dairymanagementModelStoreContainer">
+          <EntitySet Name="AccountDetails" EntityType="Self.AccountDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountDetailsLastRealStock" EntityType="Self.AccountDetailsLastRealStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountSPs" EntityType="Self.AccountSPs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeDetails" EntityType="Self.EmployeeDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeVaaraDetails" EntityType="Self.EmployeeVaaraDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MilkTypes" EntityType="Self.MilkTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VendorInfo" EntityType="Self.VendorInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VendorMilkInfo" EntityType="Self.VendorMilkInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AccountDetails_VendorInfo" Association="Self.FK_AccountDetails_VendorInfo">
+            <End Role="VendorInfo" EntitySet="VendorInfo" />
+            <End Role="AccountDetails" EntitySet="AccountDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountDetailsLastRealStock_EmployeeDetails" Association="Self.FK_AccountDetailsLastRealStock_EmployeeDetails">
+            <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
+            <End Role="AccountDetailsLastRealStock" EntitySet="AccountDetailsLastRealStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountSPs_AccountDetails" Association="Self.FK_AccountSPs_AccountDetails">
+            <End Role="AccountDetails" EntitySet="AccountDetails" />
+            <End Role="AccountSPs" EntitySet="AccountSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVaaraDetails_EmployeeDetails" Association="Self.FK_EmployeeVaaraDetails_EmployeeDetails">
+            <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
+            <End Role="EmployeeVaaraDetails" EntitySet="EmployeeVaaraDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MilkTypes_UserInfo" Association="Self.FK_MilkTypes_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="MilkTypes" EntitySet="MilkTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MilkTypes_UserInfo1" Association="Self.FK_MilkTypes_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="MilkTypes" EntitySet="MilkTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorInfo_UserInfo" Association="Self.FK_VendorInfo_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="VendorInfo" EntitySet="VendorInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorInfo_UserInfo1" Association="Self.FK_VendorInfo_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="VendorInfo" EntitySet="VendorInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorMilkInfo_MilkTypes" Association="Self.FK_VendorMilkInfo_MilkTypes">
+            <End Role="MilkTypes" EntitySet="MilkTypes" />
+            <End Role="VendorMilkInfo" EntitySet="VendorMilkInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorMilkInfo_UserInfo" Association="Self.FK_VendorMilkInfo_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="VendorMilkInfo" EntitySet="VendorMilkInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorMilkInfo_UserInfo1" Association="Self.FK_VendorMilkInfo_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="VendorMilkInfo" EntitySet="VendorMilkInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorMilkInfo_VendorInfo" Association="Self.FK_VendorMilkInfo_VendorInfo">
+            <End Role="VendorInfo" EntitySet="VendorInfo" />
+            <End Role="VendorMilkInfo" EntitySet="VendorMilkInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dairymanagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OldStock" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="TodayMilk" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="TotalPurchase" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="TotalSell" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="AvailableStock" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="RealStock" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="StockDifference" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="VendorId" Type="Int32" />
+          <Property Name="AccountDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TodayMilkNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPurchaseNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalSellNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AvailableStockNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RealStockNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StockDifferenceNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConsiderOldStock" Type="Boolean" />
+          <NavigationProperty Name="AccountSPs" Relationship="Self.FK_AccountSPs_AccountDetails" FromRole="AccountDetails" ToRole="AccountSPs" />
+          <NavigationProperty Name="VendorInfo" Relationship="dairymanagementModel.FK_AccountDetails_VendorInfo" FromRole="AccountDetail" ToRole="VendorInfo" />
+        </EntityType>
+        <EntityType Name="AccountSP">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountId" Type="Int32" />
+          <Property Name="SPValue" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="SPNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountDetail" Relationship="Self.FK_AccountSPs_AccountDetails" FromRole="AccountSPs" ToRole="AccountDetails" />
+        </EntityType>
+        <EntityType Name="EmployeeDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmployeeVaaraDetails" Relationship="Self.FK_EmployeeVaaraDetails_EmployeeDetails" FromRole="EmployeeDetails" ToRole="EmployeeVaaraDetails" />
+          <NavigationProperty Name="AccountDetailsLastRealStocks" Relationship="dairymanagementModel.FK_AccountDetailsLastRealStock_EmployeeDetails" FromRole="EmployeeDetail" ToRole="AccountDetailsLastRealStock" />
+        </EntityType>
+        <EntityType Name="EmployeeVaaraDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="Vaara" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="VaaraDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EmployeeDetail" Relationship="Self.FK_EmployeeVaaraDetails_EmployeeDetails" FromRole="EmployeeVaaraDetails" ToRole="EmployeeDetails" />
+        </EntityType>
+        <EntityType Name="MilkType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MilkType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_MilkTypes_UserInfo" FromRole="MilkTypes" ToRole="UserInfo" />
+          <NavigationProperty Name="UserInfo1" Relationship="Self.FK_MilkTypes_UserInfo1" FromRole="MilkTypes" ToRole="UserInfo" />
+          <NavigationProperty Name="VendorMilkInfoes" Relationship="Self.FK_VendorMilkInfo_MilkTypes" FromRole="MilkTypes" ToRole="VendorMilkInfo" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MilkTypes" Relationship="Self.FK_MilkTypes_UserInfo" FromRole="UserInfo" ToRole="MilkTypes" />
+          <NavigationProperty Name="MilkTypes1" Relationship="Self.FK_MilkTypes_UserInfo1" FromRole="UserInfo" ToRole="MilkTypes" />
+          <NavigationProperty Name="VendorInfoes" Relationship="Self.FK_VendorInfo_UserInfo" FromRole="UserInfo" ToRole="VendorInfo" />
+          <NavigationProperty Name="VendorInfoes1" Relationship="Self.FK_VendorInfo_UserInfo1" FromRole="UserInfo" ToRole="VendorInfo" />
+          <NavigationProperty Name="VendorMilkInfoes" Relationship="Self.FK_VendorMilkInfo_UserInfo" FromRole="UserInfo" ToRole="VendorMilkInfo" />
+          <NavigationProperty Name="VendorMilkInfoes1" Relationship="Self.FK_VendorMilkInfo_UserInfo1" FromRole="UserInfo" ToRole="VendorMilkInfo" />
+        </EntityType>
+        <EntityType Name="VendorInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_VendorInfo_UserInfo" FromRole="VendorInfo" ToRole="UserInfo" />
+          <NavigationProperty Name="UserInfo1" Relationship="Self.FK_VendorInfo_UserInfo1" FromRole="VendorInfo" ToRole="UserInfo" />
+          <NavigationProperty Name="VendorMilkInfoes" Relationship="Self.FK_VendorMilkInfo_VendorInfo" FromRole="VendorInfo" ToRole="VendorMilkInfo" />
+          <NavigationProperty Name="AccountDetails" Relationship="dairymanagementModel.FK_AccountDetails_VendorInfo" FromRole="VendorInfo" ToRole="AccountDetail" />
+        </EntityType>
+        <EntityType Name="VendorMilkInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int32" />
+          <Property Name="MilkTypeId" Type="Int32" />
+          <Property Name="MilkValue" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="FatValue" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MilkType" Relationship="Self.FK_VendorMilkInfo_MilkTypes" FromRole="VendorMilkInfo" ToRole="MilkTypes" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK_VendorMilkInfo_UserInfo" FromRole="VendorMilkInfo" ToRole="UserInfo" />
+          <NavigationProperty Name="UserInfo1" Relationship="Self.FK_VendorMilkInfo_UserInfo1" FromRole="VendorMilkInfo" ToRole="UserInfo" />
+          <NavigationProperty Name="VendorInfo" Relationship="Self.FK_VendorMilkInfo_VendorInfo" FromRole="VendorMilkInfo" ToRole="VendorInfo" />
+        </EntityType>
+        <Association Name="FK_AccountSPs_AccountDetails">
+          <End Role="AccountDetails" Type="Self.AccountDetail" Multiplicity="0..1" />
+          <End Role="AccountSPs" Type="Self.AccountSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountSPs">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeVaaraDetails_EmployeeDetails">
+          <End Role="EmployeeDetails" Type="Self.EmployeeDetail" Multiplicity="0..1" />
+          <End Role="EmployeeVaaraDetails" Type="Self.EmployeeVaaraDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeVaaraDetails">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MilkTypes_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="MilkTypes" Type="Self.MilkType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MilkTypes">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MilkTypes_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="MilkTypes" Type="Self.MilkType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MilkTypes">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorMilkInfo_MilkTypes">
+          <End Role="MilkTypes" Type="Self.MilkType" Multiplicity="0..1" />
+          <End Role="VendorMilkInfo" Type="Self.VendorMilkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MilkTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorMilkInfo">
+              <PropertyRef Name="MilkTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorInfo_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="VendorInfo" Type="Self.VendorInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorInfo">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorInfo_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="VendorInfo" Type="Self.VendorInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorInfo">
+              <PropertyRef Name="UpdateBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorMilkInfo_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="VendorMilkInfo" Type="Self.VendorMilkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorMilkInfo">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorMilkInfo_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="VendorMilkInfo" Type="Self.VendorMilkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorMilkInfo">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VendorMilkInfo_VendorInfo">
+          <End Role="VendorInfo" Type="Self.VendorInfo" Multiplicity="0..1" />
+          <End Role="VendorMilkInfo" Type="Self.VendorMilkInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendorMilkInfo">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dairymanagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountDetails" EntityType="Self.AccountDetail" />
+          <EntitySet Name="AccountSPs" EntityType="Self.AccountSP" />
+          <EntitySet Name="EmployeeDetails" EntityType="Self.EmployeeDetail" />
+          <EntitySet Name="EmployeeVaaraDetails" EntityType="Self.EmployeeVaaraDetail" />
+          <EntitySet Name="MilkTypes" EntityType="Self.MilkType" />
+          <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
+          <EntitySet Name="VendorInfoes" EntityType="Self.VendorInfo" />
+          <EntitySet Name="VendorMilkInfoes" EntityType="Self.VendorMilkInfo" />
+          <AssociationSet Name="FK_AccountSPs_AccountDetails" Association="Self.FK_AccountSPs_AccountDetails">
+            <End Role="AccountDetails" EntitySet="AccountDetails" />
+            <End Role="AccountSPs" EntitySet="AccountSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeVaaraDetails_EmployeeDetails" Association="Self.FK_EmployeeVaaraDetails_EmployeeDetails">
+            <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
+            <End Role="EmployeeVaaraDetails" EntitySet="EmployeeVaaraDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MilkTypes_UserInfo" Association="Self.FK_MilkTypes_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="MilkTypes" EntitySet="MilkTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MilkTypes_UserInfo1" Association="Self.FK_MilkTypes_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="MilkTypes" EntitySet="MilkTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorMilkInfo_MilkTypes" Association="Self.FK_VendorMilkInfo_MilkTypes">
+            <End Role="MilkTypes" EntitySet="MilkTypes" />
+            <End Role="VendorMilkInfo" EntitySet="VendorMilkInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorInfo_UserInfo" Association="Self.FK_VendorInfo_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="VendorInfo" EntitySet="VendorInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorInfo_UserInfo1" Association="Self.FK_VendorInfo_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="VendorInfo" EntitySet="VendorInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorMilkInfo_UserInfo" Association="Self.FK_VendorMilkInfo_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="VendorMilkInfo" EntitySet="VendorMilkInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorMilkInfo_UserInfo1" Association="Self.FK_VendorMilkInfo_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="VendorMilkInfo" EntitySet="VendorMilkInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VendorMilkInfo_VendorInfo" Association="Self.FK_VendorMilkInfo_VendorInfo">
+            <End Role="VendorInfo" EntitySet="VendorInfoes" />
+            <End Role="VendorMilkInfo" EntitySet="VendorMilkInfoes" />
+          </AssociationSet>
+          <EntitySet Name="AccountDetailsLastRealStocks" EntityType="dairymanagementModel.AccountDetailsLastRealStock" />
+          <AssociationSet Name="FK_AccountDetails_VendorInfo" Association="dairymanagementModel.FK_AccountDetails_VendorInfo">
+            <End Role="VendorInfo" EntitySet="VendorInfoes" />
+            <End Role="AccountDetail" EntitySet="AccountDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountDetailsLastRealStock_EmployeeDetails" Association="dairymanagementModel.FK_AccountDetailsLastRealStock_EmployeeDetails">
+            <End Role="EmployeeDetail" EntitySet="EmployeeDetails" />
+            <End Role="AccountDetailsLastRealStock" EntitySet="AccountDetailsLastRealStocks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AccountDetailsLastRealStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RealStock" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="AccountDate" Type="DateTime" Precision="3" />
+          <Property Name="AccountId" Type="Int32" />
+          <NavigationProperty Name="EmployeeDetail" Relationship="dairymanagementModel.FK_AccountDetailsLastRealStock_EmployeeDetails" FromRole="AccountDetailsLastRealStock" ToRole="EmployeeDetail" />
+        </EntityType>
+        <Association Name="FK_AccountDetails_VendorInfo">
+          <End Type="dairymanagementModel.VendorInfo" Role="VendorInfo" Multiplicity="0..1" />
+          <End Type="dairymanagementModel.AccountDetail" Role="AccountDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VendorInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountDetail">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountDetailsLastRealStock_EmployeeDetails">
+          <End Type="dairymanagementModel.EmployeeDetail" Role="EmployeeDetail" Multiplicity="0..1" />
+          <End Type="dairymanagementModel.AccountDetailsLastRealStock" Role="AccountDetailsLastRealStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountDetailsLastRealStock">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dairymanagementModelStoreContainer" CdmEntityContainer="dairymanagementEntities">
+          <EntitySetMapping Name="AccountDetails">
+            <EntityTypeMapping TypeName="dairymanagementModel.AccountDetail">
+              <MappingFragment StoreEntitySet="AccountDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OldStock" ColumnName="OldStock" />
+                <ScalarProperty Name="TodayMilk" ColumnName="TodayMilk" />
+                <ScalarProperty Name="TotalPurchase" ColumnName="TotalPurchase" />
+                <ScalarProperty Name="TotalSell" ColumnName="TotalSell" />
+                <ScalarProperty Name="AvailableStock" ColumnName="AvailableStock" />
+                <ScalarProperty Name="RealStock" ColumnName="RealStock" />
+                <ScalarProperty Name="StockDifference" ColumnName="StockDifference" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="AccountDateTime" ColumnName="AccountDateTime" />
+                <ScalarProperty Name="TodayMilkNote" ColumnName="TodayMilkNote" />
+                <ScalarProperty Name="TotalPurchaseNote" ColumnName="TotalPurchaseNote" />
+                <ScalarProperty Name="TotalSellNote" ColumnName="TotalSellNote" />
+                <ScalarProperty Name="AvailableStockNote" ColumnName="AvailableStockNote" />
+                <ScalarProperty Name="RealStockNote" ColumnName="RealStockNote" />
+                <ScalarProperty Name="StockDifferenceNote" ColumnName="StockDifferenceNote" />
+                <ScalarProperty Name="ConsiderOldStock" ColumnName="ConsiderOldStock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountSPs">
+            <EntityTypeMapping TypeName="dairymanagementModel.AccountSP">
+              <MappingFragment StoreEntitySet="AccountSPs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="SPValue" ColumnName="SPValue" />
+                <ScalarProperty Name="SPNote" ColumnName="SPNote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeDetails">
+            <EntityTypeMapping TypeName="dairymanagementModel.EmployeeDetail">
+              <MappingFragment StoreEntitySet="EmployeeDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeVaaraDetails">
+            <EntityTypeMapping TypeName="dairymanagementModel.EmployeeVaaraDetail">
+              <MappingFragment StoreEntitySet="EmployeeVaaraDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Vaara" ColumnName="Vaara" />
+                <ScalarProperty Name="VaaraDateTime" ColumnName="VaaraDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MilkTypes">
+            <EntityTypeMapping TypeName="dairymanagementModel.MilkType">
+              <MappingFragment StoreEntitySet="MilkTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MilkType1" ColumnName="MilkType" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="dairymanagementModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorInfoes">
+            <EntityTypeMapping TypeName="dairymanagementModel.VendorInfo">
+              <MappingFragment StoreEntitySet="VendorInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendorMilkInfoes">
+            <EntityTypeMapping TypeName="dairymanagementModel.VendorMilkInfo">
+              <MappingFragment StoreEntitySet="VendorMilkInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="MilkTypeId" ColumnName="MilkTypeId" />
+                <ScalarProperty Name="MilkValue" ColumnName="MilkValue" />
+                <ScalarProperty Name="FatValue" ColumnName="FatValue" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountDetailsLastRealStocks">
+            <EntityTypeMapping TypeName="dairymanagementModel.AccountDetailsLastRealStock">
+              <MappingFragment StoreEntitySet="AccountDetailsLastRealStock">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="AccountDate" ColumnName="AccountDate" />
+                <ScalarProperty Name="RealStock" ColumnName="RealStock" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

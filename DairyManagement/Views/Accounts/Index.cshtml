@@ -1,0 +1,162 @@
+﻿@model DairyManagement.ViewModels.Accounts.AccountsVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+        <div class="toast-header">
+            <img src="..." class="rounded mr-2" alt="...">
+            <strong class="mr-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <h4>આજ નો હિસાબ</h4>
+        <hr />
+        @using (Html.BeginForm("Index", "Accounts", FormMethod.Post, new { id = "accountForm" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.AccountId)
+            <div class="form-group">
+                @Html.LabelFor(model => model.VendorId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.DropDownListFor(model => model.VendorId, Model.VendorList,
+      new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.VendorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OldStock, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.OldStock, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                    @Html.ValidationMessageFor(model => model.OldStock, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.AccountDateTime, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.AccountDateTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TodayMilk, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.TodayMilk, new { htmlAttributes = new { @class = "form-control", @onblur = "Calculate()" } })
+                    @Html.ValidationMessageFor(model => model.TodayMilk, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.TodayMilkNote, new { htmlAttributes = new { @class = "form-control", placeholder = "આજનું દૂધ નોંધ" } })
+                </div>
+            </div>
+
+            <div id="divPartialAddSP">
+                @{
+                    if (Model.SPs != null && Model.SPs.Count() > 0)
+                    {
+                        for (int i = 0; i < Model.SPs.Count(); i++)
+                        {
+                            @Html.Action("partialAddSP", "Accounts", new { i = i, accountsVMSP = Model.SPs[i] });
+                        }
+                    }
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" name="name" value="એસપી ઉમેરો" id="btnAddSP" class="btn btn-default" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TotalPurchase, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.TotalPurchase, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                    @Html.ValidationMessageFor(model => model.TotalPurchase, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.TotalPurchaseNote, new { htmlAttributes = new { @class = "form-control", placeholder = "કુલ ખરીદી નોંધ" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TotalSell, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.TotalSell, new { htmlAttributes = new { @class = "form-control", @onblur = "Calculate()" } })
+                    @Html.ValidationMessageFor(model => model.TotalSell, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.TotalSellNote, new { htmlAttributes = new { @class = "form-control", placeholder = "કુલ વેચાણ નોંધ" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AvailableStock, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.AvailableStock, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true, @title = "કુલ ખરીદી - કુલ વેચાણ" } })
+                    @Html.ValidationMessageFor(model => model.AvailableStock, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.AvailableStockNote, new { htmlAttributes = new { @class = "form-control", placeholder = "ઉપલબ્ધ સ્ટોક નોંધ" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RealStock, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.RealStock, new { htmlAttributes = new { @class = "form-control", @onblur = "Calculate()" } })
+                    @Html.ValidationMessageFor(model => model.RealStock, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.RealStockNote, new { htmlAttributes = new { @class = "form-control", placeholder = "વાસ્તવિક સ્ટોક નોંધ" } })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.ConsiderOldStock, htmlAttributes: new { @class = "control-label " })
+                    @Html.CheckBoxFor(model => model.ConsiderOldStock, new { htmlAttributes = new { @class = "form-control", placeholder = "આ એક જૂની સ્ટોક ધ્યાનમાં લો" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StockDifference, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.StockDifference, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true, @title = "વાસ્તવિક સ્ટોક - ઉપલબ્ધ સ્ટોક" } })
+                    @Html.ValidationMessageFor(model => model.StockDifference, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.StockDifferenceNote, new { htmlAttributes = new { @class = "form-control", placeholder = "સ્ટોક તફાવત નોંધ" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@section scripts{
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/util.js"></script>
+    <script src="~/Scripts/PageScripts/Account.js"></script>
+    <script>
+        var i = parseInt('@Model.SPs.Count()');
+    </script>
+}

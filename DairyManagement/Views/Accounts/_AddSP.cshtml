@@ -1,0 +1,28 @@
+﻿@model DairyManagement.ViewModels.Accounts.AccountsVMSP
+
+@{
+    int i = ViewBag.i == null ? 0 : ViewBag.i;
+    i = i + 1;
+}
+@*<tr>
+    <td>
+        @Html.EditorFor(model => model.SPValue, new { htmlAttributes = new { id = "SPValue" + (i * 2 - 1) } })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.SPNote, new { htmlAttributes = new { id = "SPNote" + (i * 2) } })
+    </td>
+</tr>*@
+
+<div class="form-group DivAddSP@(i)">
+    @Html.LabelFor(model => model.SPValue, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-3">
+        @Html.EditorFor(model => model.SPValue, new { htmlAttributes = new { @class = "form-control", id = "SPValue" + (i), @Name= "SPValue" + (i), @onblur = "Calculate()" } })
+        @Html.ValidationMessageFor(model => model.SPValue, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-5">
+        @Html.EditorFor(model => model.SPNote, new { htmlAttributes = new { @class = "form-control", placeholder = "કુલ ખરીદી નોંધ", @Name = "SPValue" + (i) + "Note" } })
+    </div>
+    <div class="col-md-2">
+        <input type="button" name="name" value="એસપી દૂર કરો" id="btnRemoveSP@(i)" onclick="RemoveSP('DivAddSP@(i)')" class="btn btn-default" />
+    </div>
+</div>

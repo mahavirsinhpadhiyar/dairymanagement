@@ -1,0 +1,20 @@
+﻿@model DairyManagement.Controllers.HomeController.Model
+
+@{
+    int i = ViewBag.i == null ? 0 : ViewBag.i;
+}
+<tr>
+    <td>
+        @Html.EditorFor(model => model.TextBox1, new { htmlAttributes = new { id = "TextBox" + (i * 2 - 1) } })
+    </td>
+    <td>
+        @* give image dynamic suffix *@
+        <img id="Image@(i*2-1)" src="~/Content/icons/ok.png" />
+    </td>
+    <td>
+        @Html.EditorFor(model => model.TextBox2, new { htmlAttributes = new { id = "TextBox2" + (i * 2) } })
+    </td>
+    <td>
+        <img id="Image@(i*2)" src="~/Content/icons/ok.png" />
+    </td>
+</tr>

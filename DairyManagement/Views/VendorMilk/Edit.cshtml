@@ -1,0 +1,128 @@
+﻿@model DairyManagement.ViewModels.VendorMilk.VendorMilkViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Vendor Milk Details</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VendorId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.VendorId, Model.VendorList,
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VendorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MilkTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.MilkTypeId, Model.MilkTypeList,
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MilkTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MilkValue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MilkValue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MilkValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FatValue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FatValue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FatValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        function getPrice() {
+            return parseFloat($("#Price").val());
+        }
+
+        $("#MilkValue").on("focusout", function () {
+            if (this.value != "" && this.value != undefined) {
+                var MilkValue = parseFloat(this.value);
+                if ($("#FatValue").val() != "" && $("#FatValue").val() != undefined) {
+                    var FatValue = parseFloat($("#FatValue").val());
+                    $("#Total").val(MilkValue * FatValue * getPrice());
+                }
+                else {
+                    $("#Total").val(MilkValue * getPrice());
+                }
+            }
+        });
+
+        $("#FatValue").on("focusout", function () {
+            if (this.value != "" && this.value != undefined) {
+                var FatValue = parseFloat(this.value);
+                if ($("#MilkValue").val() != "" && $("#MilkValue").val() != undefined) {
+                    var MilkValue = parseFloat($("#MilkValue").val());
+                    $("#Total").val(FatValue * MilkValue * getPrice());
+                }
+                else {
+                    $("#Total").val(FatValue * getPrice());
+                }
+            }
+        });
+
+        $("#Price").on("focusout", function () {
+            if (($("#MilkValue").val() != "" && $("#MilkValue").val() != undefined)
+                &&
+                ($("#FatValue").val() != "" && $("#FatValue").val() != undefined)) {
+                var MilkValue = parseFloat($("#MilkValue").val());
+                var FatValue = parseFloat($("#FatValue").val());
+                $("#Total").val(MilkValue * FatValue * getPrice());
+            }
+        });
+    </script>
+}
