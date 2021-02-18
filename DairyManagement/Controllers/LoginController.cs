@@ -1,10 +1,6 @@
 ﻿using DairyManagement.Models.LiveDBEDMX;
-using DairyManagement.ViewModels.Accounts;
 using DairyManagement.ViewModels.Login;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -24,6 +20,12 @@ namespace DairyManagement.Controllers
         {
             if (ModelState.IsValid)
             {
+                DateTime dt = new DateTime(2022, 1, 1);
+                if (DateTime.Now > dt)
+                {
+                    ModelState.AddModelError("SubscriptionDateExpire", "કૃપા કરીને સેવાનો ઉપયોગ ચાલુ રાખવા માટે તમારા સબ્સ્ક્રિપ્શનને અપગ્રેડ કરો.");
+                    return View(loginViewModel);
+                }
                 if (db.UserInfoes.FirstOrDefault(u => u.UserId == loginViewModel.Username && u.Password == loginViewModel.Password) != null)
                 {
                     Session["isuserloggedin"] = true;

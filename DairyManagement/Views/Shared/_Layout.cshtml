@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Dairy Management</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrapdatatablecss")
     @Scripts.Render("~/bundles/modernizr")
@@ -53,6 +53,14 @@
     @RenderSection("scripts", required: false)
 
     <script>
+        $(function () {
+            $("input:text").focus(function () { $(this).select(); });
+        });
+
+        function SelectAllText(obj)
+        {
+            $(obj).select();
+        }
         $('.dairyDynamicDatatable').DataTable({
         });
     </script>
