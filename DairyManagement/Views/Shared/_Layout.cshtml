@@ -28,11 +28,14 @@
                     <li>@Html.ActionLink("Vendors", "Index", "VendorInfoes")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Accounts", "ListAccounts", "Accounts")</li>
+                    <li>@Html.ActionLink("Customer Milk", "Index", "EmployeeToCustomerMilk")</li>
+                    <li>@Html.ActionLink("Staff", "Index", "EmployeeDetail")</li>
+                    <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
                     <li>
                         @if (!String.IsNullOrEmpty(Convert.ToString(Session["isuserloggedin"])) && Convert.ToBoolean(Session["isuserloggedin"]))
                         {
                             <form method="post" action="/Login/Logoff">
-                                <input type="submit" value="Logoff" style="margin-top: 13px"/>
+                                <input type="submit" value="Logoff" style="margin-top: 13px" />
                             </form>
                         }
                     </li>

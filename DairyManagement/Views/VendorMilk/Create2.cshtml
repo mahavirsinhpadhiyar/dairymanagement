@@ -1,0 +1,74 @@
+﻿@model DairyManagement.ViewModels.VendorMilk.VendorMilkViewModel
+@{
+    ViewBag.Title = "Create2";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+
+<div id="content" class="pmd-content inner-page">
+    <div class="container-fluid full-width-container">
+        <h2>Create</h2>
+        <h4>Vendor Milk Details</h4>
+        <div class="pmd-card pmd-z-depth">
+            <div class="pmd-card-body">
+
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.VendorId)
+                            @Html.DropDownListFor(model => model.VendorId, Model.VendorList,
+                                new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.VendorId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.MilkTypeId)
+                            @Html.DropDownListFor(model => model.MilkTypeId, Model.MilkTypeList,
+                                  new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MilkTypeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.MilkValue)
+                            @Html.EditorFor(model => model.MilkValue, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MilkValue, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.FatValue)
+                            @Html.EditorFor(model => model.FatValue, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FatValue, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.Price)
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.Total)
+                            @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="pmd-card-actions">
+                    <a href="javascript:void(0);" class="btn btn-primary next">Create</a>
+                    <a href="javascript:void(0);" class="btn btn-default">Back</a>
+                </div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>    
+        </div>
+     </div>
+</div>
+

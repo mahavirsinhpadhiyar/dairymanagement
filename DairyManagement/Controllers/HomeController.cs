@@ -35,5 +35,10 @@ namespace DairyManagement.Controllers
             ViewBag.i = i;
             return PartialView();
         }
+
+        public ActionResult SampleLayout()
+        {
+            return View();
+        }
     }
 }

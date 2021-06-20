@@ -1,0 +1,454 @@
+﻿@model DairyManagement.ViewModels.Accounts.AccountsVM
+
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div id="content" class="pmd-content inner-page">
+
+    <!--tab start-->
+    <div class="container-fluid full-width-container">
+
+        <!-- Title -->
+        <h1 class="section-title" id="services">
+            <span>આજ નો હિસાબ</span>
+        </h1><!-- End Title -->
+        <!--breadcrum start-->
+        <ol class="breadcrumb text-left">
+            <li><a href="index.html">Dashboard</a></li>
+            <li class="active">Form Examples</li>
+        </ol><!--breadcrum end-->
+
+        <div class="section section-custom billinfo">
+            <!--section-title -->
+            <h2>Basic Form</h2><!--section-title end -->
+            <!-- section content start-->
+            @*<form id="validationForm" action="" method="post">*@
+            @using (Html.BeginForm("Index2", "Accounts", FormMethod.Post, new { @id = "validationForm" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.AccountId)
+                <div class="pmd-card pmd-z-depth">
+                    <div class="pmd-card-body">
+                        <div class="group-fields clearfix row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    @*<label>City*</label>*@
+                                    @Html.LabelFor(model => model.VendorId)
+                                    @Html.DropDownListFor(model => model.VendorId, Model.VendorList,
+        new { @class = "select-simple form-control pmd-select2" })
+                                    @Html.ValidationMessageFor(model => model.VendorId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-fields clearfix row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    @Html.LabelFor(model => model.OldStock, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.OldStock, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    @*<label for="regular1" class="control-label">
+                                            Name*
+                                        </label>*@
+                                    @Html.LabelFor(model => model.AccountDateTime, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.AccountDateTime, new { htmlAttributes = new { @class = "form-control datepicker-default" } })
+                                    @*<input type="text" id="regular1" class="form-control">*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group-fields clearfix row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    @Html.LabelFor(model => model.TodayMilk)
+                                    @*<label for="regular1" class="control-label">
+                                        Phone*
+                                        </label>*@
+                                    @*<input type="text" id="regular1" class="form-control">*@
+
+
+                                    @Html.EditorFor(model => model.TodayMilk, new { htmlAttributes = new { @class = "form-control", @onblur = "Calculate()" } })
+                                    @Html.ValidationMessageFor(model => model.TodayMilk, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    <label for="regular1" class="control-label">
+                                        આજનું દૂધ નોંધ
+                                    </label>
+                                    @*<input type="text" id="regular1" class="form-control">*@
+                                    @Html.EditorFor(model => model.TodayMilkNote, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+                        @*--Butoon Code*@
+                    <div class="group-fields clearfix row">
+                        <div id="divPartialAddSP">
+                            @{ if (Model.SPs != null && Model.SPs.Count() > 0)
+                                {
+                                    for (int i = 0; i < Model.SPs.Count(); i++)
+                                    {
+                                        @Html.Action("partialAddSP", "Accounts", new { i = i, accountsVMSP = Model.SPs[i] });
+                                    }
+                                } }
+                        </div>
+
+                        @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" name="name" value="એસપી ઉમેરો" id="btnAddSP" class="btn btn-default" />
+            </div>
+        </div>*@
+                    </div>
+
+                    </div>
+                    <div class="pmd-card-actions">
+                        <a href="javascript:void(0);" class="btn btn-primary next" id="btnAddSP">એસપી ઉમેરો</a>
+                        @*<input type="button" name="name" value="એસપી ઉમેરો" id="btnAddSP" class="btn btn-default" />*@
+                    </div>
+
+                    <div class="pmd-card-body">
+                        @*--Button Code end*@
+                        <div class="group-fields clearfix row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    @Html.LabelFor(model => model.TotalPurchase)
+                                    @Html.EditorFor(model => model.TotalPurchase, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                                    @Html.ValidationMessageFor(model => model.TotalPurchase, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    <label for="regular1" class="control-label">
+                                        કુલ ખરીદી નોંધ
+                                    </label>
+                                    @Html.EditorFor(model => model.TotalPurchaseNote, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="group-fields clearfix row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    @Html.LabelFor(model => model.TotalSell)
+
+                                    @Html.EditorFor(model => model.TotalSell, new { htmlAttributes = new { @class = "form-control", @onblur = "Calculate()" } })
+                                    @Html.ValidationMessageFor(model => model.TotalSell, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    <label for="regular1" class="control-label">
+                                        કુલ વેચાણ નોંધ
+                                    </label>
+                                    @Html.EditorFor(model => model.TotalSellNote, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group-fields clearfix row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    @Html.LabelFor(model => model.AvailableStock)
+
+                                    @Html.EditorFor(model => model.AvailableStock, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true, @title = "કુલ ખરીદી - કુલ વેચાણ" } })
+                                    @Html.ValidationMessageFor(model => model.AvailableStock, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    <label for="regular1" class="control-label">
+                                        ઉપલબ્ધ સ્ટોક નોંધ
+                                    </label>
+                                    @Html.EditorFor(model => model.AvailableStockNote, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group-fields clearfix row">
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    @Html.LabelFor(model => model.RealStock)
+
+                                    @Html.EditorFor(model => model.RealStock, new { htmlAttributes = new { @class = "form-control", @onblur = "Calculate()" } })
+                                    @Html.ValidationMessageFor(model => model.RealStock, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    <label for="regular1" class="control-label">
+                                        વાસ્તવિક સ્ટોક નોંધ
+                                    </label>
+                                    @Html.EditorFor(model => model.RealStockNote, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-group pmd-textfield">
+                                    @Html.LabelFor(model => model.ConsiderOldStock)
+                                    @*<label for="regular1" class="control-label">
+                                            આ એક જૂની સ્ટોક ધ્યાનમાં લો
+                                        </label>*@
+                                    @Html.CheckBoxFor(model => model.ConsiderOldStock, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group-fields clearfix row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    @Html.LabelFor(model => model.StockDifference)
+                                    @Html.EditorFor(model => model.StockDifference, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true, @title = "વાસ્તવિક સ્ટોક - ઉપલબ્ધ સ્ટોક" } })
+                                    @Html.ValidationMessageFor(model => model.StockDifference, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                    <label for="regular1" class="control-label">
+                                        સ્ટોક તફાવત નોંધ
+                                    </label>
+                                    @Html.EditorFor(model => model.StockDifferenceNote, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group-fields clearfix row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="checkbox pmd-default-theme">
+                                    <label class="pmd-checkbox checkbox-pmd-ripple-effect">
+                                        <input type="checkbox" value="">
+                                        <span>Save Details</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pmd-card-actions">
+                        <a href="javascript:void(0);" class="btn btn-primary next">Submit</a>
+                        <a href="javascript:void(0);" class="btn btn-default">Cancel</a>
+                    </div>
+                </div> <!-- section content end -->
+            }
+            @*</form>*@
+        </div>
+
+        <!--<div class="section section-custom billinfo">-->
+        <!--section-title -->
+        <!--<h2>Horizontal Form</h2>--><!--section-title end -->
+        <!-- section content start-->
+        <!--<div class="pmd-card pmd-z-depth">
+            <div class="pmd-card-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group pmd-textfield">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input class="form-control input-sm" id="inputEmail3" placeholder="Email" type="email">
+                        </div>
+                    </div>
+                    <div class="form-group pmd-textfield">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+
+                            <div class="fg-line">
+                                <input class="form-control input-sm" id="inputPassword3" placeholder="Password" type="password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                    <input value="" type="checkbox">
+                                    <i class="input-helper"></i>
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary pmd-checkbox-ripple-effect">Sign in</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>-->
+        <!-- section content end -->
+        <!--</div>
+
+        <div class="section section-custom billinfo">-->
+        <!--section-title -->
+        <!--<h2>Inline Form </h2>--><!--section-title end -->
+        <!-- section content start-->
+        <!--<div class="pmd-card pmd-z-depth">
+            <div class="pmd-card-body">
+                <form class="row" role="form">
+                    <div class="col-sm-3">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <input class="form-control" id="exampleInputEmail2" type="email" placeholder="Email address">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <input class="form-control" id="exampleInputPassword2" type="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="checkbox">
+                            <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                <input value="" type="checkbox">
+                                Remember me
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary pmd-ripple-effect">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>-->
+        <!-- section content end -->
+        <!--</div>
+
+        <div class="section section-custom login-card-section">-->
+        <!--section-title -->
+        <!--<h2>login Form </h2>--><!--section-title end -->
+        <!-- section content start-->
+        <!--<div class="pmd-card card-default pmd-z-depth">
+            <div class="login-card">
+                <form>
+                    <div class="pmd-card-title card-header-border text-center">
+                        <div class="loginlogo">
+                            <a href="javascript:void(0);"><img src="themes/images/logo-icon.png" alt="Logo"></a>
+                        </div>
+                        <h3>Sign In <span>with <strong>PROPELLER</strong></span></h3>
+                    </div>
+
+                    <div class="pmd-card-body">
+                        <div class="alert alert-success" role="alert"> Oh snap! Change a few things up and try submitting again. </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="inputError1" class="control-label pmd-input-group-label">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="material-icons md-dark pmd-sm">perm_identity</i></div>
+                                <input class="form-control" id="exampleInputAmount" type="text"><span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="inputError1" class="control-label pmd-input-group-label">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="material-icons md-dark pmd-sm">lock_outline</i></div>
+                                <input class="form-control" id="exampleInputAmount" type="text"><span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pmd-card-footer card-footer-no-border card-footer-p16 text-center">
+                        <div class="form-group clearfix">
+                            <div class="checkbox pull-left">
+                                <label class="pmd-checkbox checkbox-pmd-ripple-effect">
+                                    <input checked="" value="" type="checkbox">
+                                    <span class="pmd-checkbox-label">&nbsp;</span><span class="pmd-checkbox"> Remember me</span>
+                                </label>
+                            </div>
+                            <span class="pull-right forgot-password">
+                                <a href="javascript:void(0);">Forgot password?</a>
+                            </span>
+                        </div>
+                        <a href="index.html" type="button" class="btn pmd-ripple-effect btn-primary btn-block">Login</a>
+                        <p class="redirection-link">Don't have an account? <a href="javascript:void(0);" class="login-register">Sign Up</a>. </p>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="register-card">
+                <div class="pmd-card-title card-header-border text-center">
+                    <div class="loginlogo">
+                        <a href="javascript:void(0);"><img src="themes/images/logo-icon.png" alt="Logo"></a>
+                    </div>
+                    <h3>Sign Up <span>with <strong>PROPELLER</strong></span></h3>
+                </div>
+                <form>
+                    <div class="pmd-card-body">
+
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="inputError1" class="control-label pmd-input-group-label">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="material-icons md-dark pmd-sm">perm_identity</i></div>
+                                <input class="form-control" id="exampleInputAmount" type="text"><span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="inputError1" class="control-label pmd-input-group-label">Email address</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="material-icons md-dark pmd-sm">email</i></div>
+                                <input class="form-control" id="exampleInputAmount" type="text"><span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="inputError1" class="control-label pmd-input-group-label">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="material-icons md-dark pmd-sm">lock_outline</i></div>
+                                <input class="form-control" id="exampleInputAmount" type="text"><span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pmd-card-footer card-footer-no-border card-footer-p16 text-center">
+                        <a href="index.html" type="button" class="btn pmd-ripple-effect btn-primary btn-block">Sign Up</a>
+                        <p class="redirection-link">Already have an account? <a href="javascript:void(0);" class="register-login">Sign In</a>. </p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="forgot-password-card">
+                <form>
+                    <div class="pmd-card-title card-header-border text-center">
+                        <div class="loginlogo">
+                            <a href="javascript:void(0);"><img src="themes/images/logo-icon.png" alt="Logo"></a>
+                        </div>
+                        <h3>Forgot password?<br><span>Submit your email address and we'll send you a link to reset your password.</span></h3>
+                    </div>
+                    <div class="pmd-card-body">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="inputError1" class="control-label pmd-input-group-label">Email address</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="material-icons md-dark pmd-sm">email</i></div>
+                                <input class="form-control" id="exampleInputAmount" type="text"><span class="pmd-textfield-focused"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pmd-card-footer card-footer-no-border card-footer-p16 text-center">
+                        <a href="index.html" type="button" class="btn pmd-ripple-effect btn-primary btn-block">Submit</a>
+                        <p class="redirection-link">Already registered? <a href="javascript:void(0);" class="register-login">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>-->
+        <!-- section content end -->
+        <!--</div>-->
+
+    </div><!-- tab end -->
+
+</div>
+
+@section scripts{
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/util.js"></script>
+    <script src="~/Scripts/PageScripts/Account.js"></script>
+    <script>
+        var i = parseInt('@Model.SPs.Count()');
+    </script>
+}

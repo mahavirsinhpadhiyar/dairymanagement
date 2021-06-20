@@ -1,5 +1,6 @@
 ﻿using DairyManagement.Infrastructure;
-using DairyManagement.Models.LiveDBEDMX;
+using DairyManagement.Models;
+using DairyManagement.Models.Entities;
 using DairyManagement.ViewModels.VendorMilk;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace DairyManagement.Controllers
     [CustomAuthorize]
     public class VendorMilkController : HandleExceptionController
     {
-        private dairymanagementEntities db = new dairymanagementEntities();
+        private DMDBContext db = new DMDBContext();
 
         // GET: VendorMilk
         public ActionResult Index()
@@ -64,9 +65,52 @@ namespace DairyManagement.Controllers
 
             return View(vendorMilkViewModel);
         }
+        public ActionResult Details2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendorMilkInfo vendorMilk = db.VendorMilkInfoes.Find(id);
+            if (vendorMilk == null)
+            {
+                return HttpNotFound();
+            }
+            VendorMilkViewModel vendorMilkViewModel = new VendorMilkViewModel();
+            vendorMilkViewModel.Id = vendorMilk.Id;
+            vendorMilkViewModel.FatValue = vendorMilk.FatValue;
+            vendorMilkViewModel.MilkType = vendorMilk.MilkType.MilkType1;
+            vendorMilkViewModel.MilkValue = vendorMilk.MilkValue;
+            vendorMilkViewModel.Price = vendorMilk.Price;
+            vendorMilkViewModel.Total = vendorMilk.Total;
+            vendorMilkViewModel.CreatedBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.CreatedBy)?.FirstName;
+            vendorMilkViewModel.UpdateBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.UpdatedBy)?.FirstName;
+            vendorMilkViewModel.CreatedDate = vendorMilk.CreatedDate;
+            vendorMilkViewModel.UpdatedDate = vendorMilk.UpdatedDate;
+            vendorMilkViewModel.VendorName = vendorMilk.VendorInfo.VendorName;
+
+            return View(vendorMilkViewModel);
+        }
 
         // GET: VendorMilk/Create
         public ActionResult Create()
+        {
+            VendorMilkViewModel vendorMilkViewModel = new VendorMilkViewModel();
+            vendorMilkViewModel.MilkTypeList = db.MilkTypes.ToList().Select(m => new SelectListItem()
+            {
+                Text = m.MilkType1,
+                Value = m.Id.ToString()
+            }).ToList();
+            vendorMilkViewModel.VendorList = db.VendorInfoes.ToList().Select(m => new SelectListItem()
+            {
+                Text = m.VendorName,
+                Value = m.Id.ToString()
+            }).ToList();
+            vendorMilkViewModel.Price = 28;
+            return View(vendorMilkViewModel);
+        }
+
+        public ActionResult Create2()
         {
             VendorMilkViewModel vendorMilkViewModel = new VendorMilkViewModel();
             vendorMilkViewModel.MilkTypeList = db.MilkTypes.ToList().Select(m => new SelectListItem()
@@ -158,6 +202,43 @@ namespace DairyManagement.Controllers
 
             return View(vendorMilkViewModel);
         }
+        public ActionResult Edit2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendorMilkInfo vendorMilk = db.VendorMilkInfoes.Find(id);
+            if (vendorMilk == null)
+            {
+                return HttpNotFound();
+            }
+
+            VendorMilkViewModel vendorMilkViewModel = new VendorMilkViewModel();
+            vendorMilkViewModel.Id = vendorMilk.Id;
+            vendorMilkViewModel.VendorId = vendorMilk.VendorId;
+            vendorMilkViewModel.FatValue = vendorMilk.FatValue;
+            vendorMilkViewModel.MilkTypeId = vendorMilk.MilkTypeId;
+            vendorMilkViewModel.MilkValue = vendorMilk.MilkValue;
+            vendorMilkViewModel.Price = vendorMilk.Price;
+            vendorMilkViewModel.Total = vendorMilk.Total;
+            vendorMilkViewModel.CreatedBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.CreatedBy)?.FirstName;
+            vendorMilkViewModel.UpdateBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.UpdatedBy)?.FirstName;
+            vendorMilkViewModel.CreatedDate = vendorMilk.CreatedDate;
+            vendorMilkViewModel.UpdatedDate = vendorMilk.UpdatedDate;
+            vendorMilkViewModel.MilkTypeList = db.MilkTypes.ToList().Select(m => new SelectListItem()
+            {
+                Text = m.MilkType1,
+                Value = m.Id.ToString()
+            }).ToList();
+            vendorMilkViewModel.VendorList = db.VendorInfoes.ToList().Select(m => new SelectListItem()
+            {
+                Text = m.VendorName,
+                Value = m.Id.ToString()
+            }).ToList();
+
+            return View(vendorMilkViewModel);
+        }
 
         // POST: VendorMilk/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -202,6 +283,34 @@ namespace DairyManagement.Controllers
 
         // GET: VendorMilk/Delete/5
         public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendorMilkInfo vendorMilk = db.VendorMilkInfoes.Find(id);
+
+            VendorMilkViewModel vendorMilkViewModel = new VendorMilkViewModel();
+            vendorMilkViewModel.Id = vendorMilk.Id;
+            vendorMilkViewModel.VendorId = vendorMilk.VendorId;
+            vendorMilkViewModel.FatValue = vendorMilk.FatValue;
+            vendorMilkViewModel.MilkType = vendorMilk.MilkType.MilkType1;
+            vendorMilkViewModel.MilkValue = vendorMilk.MilkValue;
+            vendorMilkViewModel.Price = vendorMilk.Price;
+            vendorMilkViewModel.Total = vendorMilk.Total;
+            vendorMilkViewModel.VendorName = vendorMilk.VendorInfo.VendorName;
+            vendorMilkViewModel.CreatedBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.CreatedBy)?.FirstName;
+            vendorMilkViewModel.UpdateBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.UpdatedBy)?.FirstName;
+            vendorMilkViewModel.UpdatedDate = vendorMilk.UpdatedDate;
+            vendorMilkViewModel.CreatedDate = vendorMilk.CreatedDate;
+
+            if (vendorMilk == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vendorMilkViewModel);
+        }
+        public ActionResult Delete2(int? id)
         {
             if (id == null)
             {

@@ -1,5 +1,6 @@
 ﻿using DairyManagement.Infrastructure;
-using DairyManagement.Models.LiveDBEDMX;
+using DairyManagement.Models;
+using DairyManagement.Models.Entities;
 using DairyManagement.ViewModels.Accounts;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace DairyManagement.Controllers
     [CustomAuthorize]
     public class AccountsController : HandleExceptionController
     {
-        private dairymanagementEntities db = new dairymanagementEntities();
+        private DMDBContext db = new DMDBContext();
         protected DateTime YesterdayStartTime;
         protected DateTime YesterdayEndTime;
         // GET: Accounts
@@ -367,6 +368,56 @@ namespace DairyManagement.Controllers
             }
 
             return accountDetailsLastRealStock;
+        }
+
+        public ActionResult Index2(string Message)
+        {
+            AccountsVM accountsVM = new AccountsVM();
+            accountsVM.VendorList = db.VendorInfoes.ToList().Select(m => new SelectListItem()
+            {
+                Text = m.VendorName,
+                Value = m.Id.ToString()
+            }).ToList();
+            if (!string.IsNullOrEmpty(Message))
+            {
+                ViewBag.Message = Message;
+            }
+            accountsVM.SPs = new List<AccountsVMSP>();
+
+            //DateTime tempDateTime = DateTime.Now;
+            //List<AccountDetail> OldStockDetails = new List<AccountDetail>();
+
+            //if (db.AccountDetails.Count() > 0)
+            //{
+            //    tempDateTime = Convert.ToDateTime(db.AccountDetails.OrderByDescending(o => o.Id).FirstOrDefault().AccountDateTime);
+
+            //    //To not consider without old stock entry for realstock
+            //    if(tempDateTime.Date == DateTime.Today)
+            //    {
+            //        tempDateTime = tempDateTime.Date.AddDays(-1);
+            //    }
+
+            //    YesterdayStartTime = new DateTime(tempDateTime.Year, tempDateTime.Month, tempDateTime.Day, 0, 0, 0);
+            //    YesterdayEndTime = new DateTime(tempDateTime.Year, tempDateTime.Month, tempDateTime.Day, 23, 59, 59);
+            //}
+            //else
+            //{
+            //    YesterdayStartTime = new DateTime(tempDateTime.Year, tempDateTime.Month, tempDateTime.Day - 1, 0, 0, 0);
+            //    YesterdayEndTime = new DateTime(tempDateTime.Year, tempDateTime.Month, tempDateTime.Day - 1, 23, 59, 59);
+            //}
+
+            //OldStockDetails = db.AccountDetails.Where(u => u.AccountDateTime < YesterdayEndTime && u.AccountDateTime > YesterdayStartTime && u.ConsiderOldStock == true).ToList();
+
+            //if (OldStockDetails!= null && OldStockDetails.Count() > 0)
+            //{
+            //    foreach (var item in OldStockDetails)
+            //    {
+            //        accountsVM.OldStock += Convert.ToDecimal(item.RealStock);
+            //    }
+            //}
+
+            accountsVM.OldStock = Convert.ToDecimal(db.AccountDetailsLastRealStocks.FirstOrDefault()?.RealStock);
+            return View(accountsVM);
         }
     }
 }

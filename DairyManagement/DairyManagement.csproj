@@ -126,6 +126,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\EmployeeDetailController.cs" />
+    <Compile Include="Controllers\EmployeeToCustomerMilkController.cs" />
     <Compile Include="Controllers\HandleExceptionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -135,6 +138,27 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\CustomAuthorize.cs" />
+    <Compile Include="Migrations\202103080723258_initialset.cs" />
+    <Compile Include="Migrations\202103080723258_initialset.Designer.cs">
+      <DependentUpon>202103080723258_initialset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DMDBContext.cs" />
+    <Compile Include="Models\DMDBInitializer.cs" />
+    <Compile Include="Models\Entities\AccountDetail.cs" />
+    <Compile Include="Models\Entities\AccountDetailsLastRealStock.cs" />
+    <Compile Include="Models\Entities\AccountSP.cs" />
+    <Compile Include="Models\Entities\CustomerInfo.cs" />
+    <Compile Include="Models\Entities\EmployeeDetail.cs" />
+    <Compile Include="Models\Entities\EmployeeSalary.cs" />
+    <Compile Include="Models\Entities\EmployeeVaaraDetail.cs" />
+    <Compile Include="Models\Entities\Generic.cs" />
+    <Compile Include="Models\Entities\MilkType.cs" />
+    <Compile Include="Models\Entities\StaffGivenMilkToCustomer.cs" />
+    <Compile Include="Models\Entities\UserInfo.cs" />
+    <Compile Include="Models\Entities\VendorInfo.cs" />
+    <Compile Include="Models\Entities\VendorMilkInfo.cs" />
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\LiveDBEDMX\AccountDetail.cs">
       <DependentUpon>DairyManagementLive.tt</DependentUpon>
     </Compile>
@@ -179,6 +203,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Accounts\AccountsVM.cs" />
+    <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeToCustomerMilk\EmpToCustMilkVM.cs" />
+    <Compile Include="ViewModels\Employee\EmployeeDetailsVM.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
     <Compile Include="ViewModels\VendorMilk\VendorMilkViewModel.cs" />
     <Compile Include="ViewModels\Vendor\VendorListViewModel.cs" />
@@ -512,6 +539,28 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Accounts\ListAccounts.cshtml" />
+    <Content Include="Views\Accounts\Index2.cshtml" />
+    <Content Include="Views\EmployeeDetail\Create.cshtml" />
+    <Content Include="Views\EmployeeDetail\Delete.cshtml" />
+    <Content Include="Views\EmployeeDetail\Edit.cshtml" />
+    <Content Include="Views\EmployeeDetail\Index.cshtml" />
+    <Content Include="Views\EmployeeToCustomerMilk\Create.cshtml" />
+    <Content Include="Views\EmployeeToCustomerMilk\Index.cshtml" />
+    <Content Include="Views\Home\SampleLayout.cshtml" />
+    <Content Include="Views\Shared\_SimpleLayout.cshtml" />
+    <Content Include="Views\VendorInfoes\Create2.cshtml" />
+    <Content Include="Views\VendorInfoes\Delete2.cshtml" />
+    <Content Include="Views\VendorInfoes\Details2.cshtml" />
+    <Content Include="Views\VendorInfoes\Edit2.cshtml" />
+    <Content Include="Views\VendorMilk\Create2.cshtml" />
+    <Content Include="Views\VendorMilk\Delete2.cshtml" />
+    <Content Include="Views\VendorMilk\Details2.cshtml" />
+    <Content Include="Views\VendorMilk\Edit2.cshtml" />
+    <Content Include="Views\VendorMilk\Index2.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -543,6 +592,11 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DairyManagementLive.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202103080723258_initialset.resx">
+      <DependentUpon>202103080723258_initialset.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

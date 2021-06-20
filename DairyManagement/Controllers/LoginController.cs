@@ -1,12 +1,6 @@
-﻿using DairyManagement.Models.LiveDBEDMX;
+﻿using DairyManagement.Models;
 using DairyManagement.ViewModels.Login;
 using System;
-using DairyManagement.ViewModels.Accounts;
-using DairyManagement.ViewModels.Login;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -14,7 +8,7 @@ namespace DairyManagement.Controllers
 {
     public class LoginController : HandleExceptionController
     {
-        private dairymanagementEntities db = new dairymanagementEntities();
+        private DMDBContext db = new DMDBContext();
         // GET: Login
         public ActionResult Index()
         {

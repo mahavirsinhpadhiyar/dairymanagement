@@ -1,0 +1,119 @@
+﻿@model DairyManagement.ViewModels.VendorMilk.VendorMilkViewModel
+
+@{ ViewBag.Title = "Edit2";
+    Layout = "~/Views/Shared/_NewLayout.cshtml"; }
+
+<div id="content" class="pmd-content inner-page">
+    <div class="container-fluid full-width-container">
+        <h2>Edit</h2>
+        <h4>Vendor Milk Details</h4>
+        <div class="pmd-card pmd-z-depth">
+            <div class="pmd-card-body">
+
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.VendorId)
+                            @Html.DropDownListFor(model => model.VendorId, Model.VendorList,
+                                  new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.VendorId, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.MilkTypeId)
+                            @Html.DropDownListFor(model => model.MilkTypeId, Model.MilkTypeList,
+                                                      new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MilkTypeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.MilkValue)
+                            @Html.EditorFor(model => model.MilkValue, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MilkValue, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.FatValue)
+                            @Html.EditorFor(model => model.FatValue, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FatValue, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.Price)
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.LabelFor(model => model.Total)
+                            @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="pmd-card-actions">
+                    <a href="javascript:void(0);" class="btn btn-primary next">Submit</a>
+                    <a href="javascript:void(0);" class="btn btn-default">Back</a>
+                </div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        function getPrice() {
+            return parseFloat($("#Price").val());
+        }
+
+        $("#MilkValue").on("focusout", function () {
+            if (this.value != "" && this.value != undefined) {
+                var MilkValue = parseFloat(this.value);
+                if ($("#FatValue").val() != "" && $("#FatValue").val() != undefined) {
+                    var FatValue = parseFloat($("#FatValue").val());
+                    $("#Total").val(MilkValue * FatValue * getPrice());
+                }
+                else {
+                    $("#Total").val(MilkValue * getPrice());
+                }
+            }
+        });
+
+        $("#FatValue").on("focusout", function () {
+            if (this.value != "" && this.value != undefined) {
+                var FatValue = parseFloat(this.value);
+                if ($("#MilkValue").val() != "" && $("#MilkValue").val() != undefined) {
+                    var MilkValue = parseFloat($("#MilkValue").val());
+                    $("#Total").val(FatValue * MilkValue * getPrice());
+                }
+                else {
+                    $("#Total").val(FatValue * getPrice());
+                }
+            }
+        });
+
+        $("#Price").on("focusout", function () {
+            if (($("#MilkValue").val() != "" && $("#MilkValue").val() != undefined)
+                &&
+                ($("#FatValue").val() != "" && $("#FatValue").val() != undefined)) {
+                var MilkValue = parseFloat($("#MilkValue").val());
+                var FatValue = parseFloat($("#FatValue").val());
+                $("#Total").val(MilkValue * FatValue * getPrice());
+            }
+        });
+    </script>
+}

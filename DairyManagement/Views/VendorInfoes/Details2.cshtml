@@ -1,0 +1,109 @@
+﻿@model DairyManagement.ViewModels.Vendor.VendorViewModel
+
+@{
+    ViewBag.Title = "Details2";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div id="content" class="pmd-content inner-page">
+    <div class="container-fluid full-width-container">
+        <!--section-title -->
+        <h2>Details</h2>
+        <h4>Vendor Info</h4>
+        <!--section-title end -->
+        <!-- section content start-->
+        <div class="pmd-card pmd-z-depth">
+            <div class="pmd-card-body">
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayNameFor(model => model.VendorName)
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayFor(model => model.VendorName)
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayNameFor(model => model.LocationName)
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayFor(model => model.LocationName)
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayNameFor(model => model.CreatedBy)
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayFor(model => model.CreatedBy)
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayNameFor(model => model.CreatedDate)
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayNameFor(model => model.UpdateBy)
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayNameFor(model => model.UpdatedDate)
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayNameFor(model => model.UpdateBy)
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayFor(model => model.UpdateBy)
+                        </div>
+                    </div>
+                </div>
+                <div class="group-fields clearfix row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayNameFor(model => model.UpdatedDate)
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            @Html.DisplayFor(model => model.UpdatedDate)
+                        </div>
+                    </div>
+                </div>
+                <div class="pmd-card-actions">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) | @Html.ActionLink("Back to List", "Index")
+                </div>
+                <!-- section content End-->
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,5 +1,6 @@
 ﻿using DairyManagement.Infrastructure;
-using DairyManagement.Models.LiveDBEDMX;
+using DairyManagement.Models;
+using DairyManagement.Models.Entities;
 using DairyManagement.ViewModels.Vendor;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +14,7 @@ namespace DairyManagement.Controllers
     [CustomAuthorize]
     public class VendorInfoesController : HandleExceptionController
     {
-        private dairymanagementEntities db = new dairymanagementEntities();
+        private DMDBContext db = new DMDBContext();
 
         // GET: VendorInfoes
         public ActionResult Index()
@@ -54,12 +55,37 @@ namespace DairyManagement.Controllers
             return View(vendorModel);
         }
 
+        public ActionResult Details2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendorInfo vendorInfo = db.VendorInfoes.Find(id);
+            VendorViewModel vendorModel = new VendorViewModel();
+            vendorModel.VendorName = vendorInfo.VendorName;
+            vendorModel.LocationName = vendorInfo.LocationName;
+            vendorModel.Id = vendorInfo.Id;
+            vendorModel.CreatedBy = vendorInfo.UserInfo?.FirstName;
+            vendorModel.UpdateBy = vendorInfo.UserInfo1?.FirstName;
+            vendorModel.CreatedDate = vendorInfo.CreatedDate;
+            vendorModel.UpdatedDate = vendorInfo.UpdatedDate;
+            if (vendorInfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vendorModel);
+        }
+
         // GET: VendorInfoes/Create
         public ActionResult Create()
         {
             return View(new VendorViewModel());
         }
-
+        public ActionResult Create2()
+        {
+            return View(new VendorViewModel());
+        }
         // POST: VendorInfoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -102,6 +128,23 @@ namespace DairyManagement.Controllers
             }
             return View(vendorModel);
         }
+        public ActionResult Edit2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendorInfo vendorInfo = db.VendorInfoes.Find(id);
+            VendorViewModel vendorModel = new VendorViewModel();
+            vendorModel.VendorName = vendorInfo.VendorName;
+            vendorModel.LocationName = vendorInfo.LocationName;
+            vendorModel.Id = vendorInfo.Id;
+            if (vendorInfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vendorModel);
+        }
 
         // POST: VendorInfoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -128,6 +171,27 @@ namespace DairyManagement.Controllers
 
         // GET: VendorInfoes/Delete/5
         public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            VendorInfo vendorInfo = db.VendorInfoes.Find(id);
+            VendorViewModel vendorModel = new VendorViewModel();
+            vendorModel.VendorName = vendorInfo.VendorName;
+            vendorModel.LocationName = vendorInfo.LocationName;
+            vendorModel.Id = vendorInfo.Id;
+            vendorModel.CreatedBy = vendorInfo.UserInfo?.FirstName;
+            vendorModel.UpdateBy = vendorInfo.UserInfo1?.FirstName;
+            vendorModel.CreatedDate = vendorInfo.CreatedDate;
+            vendorModel.UpdatedDate = vendorInfo.UpdatedDate;
+            if (vendorInfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vendorModel);
+        }
+        public ActionResult Delete2(int? id)
         {
             if (id == null)
             {

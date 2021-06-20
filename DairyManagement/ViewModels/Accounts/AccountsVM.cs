@@ -54,6 +54,7 @@ namespace DairyManagement.ViewModels.Accounts
         public string StockDifferenceNote { get; set; }
         [Display(Name = "આવતીકાલનો જૂનો સ્ટોક")]
         public Boolean ConsiderOldStock { get; set; }
+        [Display(Name = "Account Date")]
         [Required(ErrorMessage = "Please enter Date")]
         public DateTime AccountDateTime { get; set; }
     }

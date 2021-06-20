@@ -1,0 +1,48 @@
+﻿@model DairyManagement.ViewModels.Vendor.VendorViewModel
+@{
+    ViewBag.Title = "Create2";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+
+<div id="content" class="pmd-content inner-page">
+    <div class="container-fluid full-width-container">
+
+        <h2>Create</h2>
+        <h4>Vendor Info</h4>
+        <div class="group-fields clearfix row">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                    @Html.LabelFor(model => model.VendorName)
+
+                    @Html.EditorFor(model => model.VendorName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VendorName, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+        <div class="group-fields clearfix row">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                    @Html.LabelFor(model => model.LocationName)
+
+                    @Html.EditorFor(model => model.LocationName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LocationName, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+
+                <div class="pmd-card-actions">
+                    <a href="javascript:void(0);" class="btn btn-primary next">Create</a>
+                    <a href="javascript:void(0);" class="btn btn-primary next">Back </a>
+                </div>
+            </div>
+            @Html.ActionLink("Back to List", "Index")
+
+        </div>
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
