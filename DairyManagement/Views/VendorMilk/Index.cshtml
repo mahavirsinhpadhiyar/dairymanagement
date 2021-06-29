@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<DairyManagement.ViewModels.VendorMilk.VendorMilkViewModel>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <h2>Vendor Milk List</h2>
 
@@ -43,6 +41,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.UpdatedDate)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoneyPaid)
+            </th>
             <th>Action</th>
         </tr>
     </thead>
@@ -50,53 +51,60 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VendorName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MilkType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MilkValue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FatValue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Total)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                </td>
-                <td>
-                    @{
-                        string createdDate = Convert.ToDateTime(item.CreatedDate).ToString("dd/MM/yyyy HH:mm:ss");
-                    }
-                    @Html.DisplayFor(modelItem => createdDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdateBy)
-                </td>
-                <td>
-                    @{
-                        string updatedDate = string.Empty;
-                        if (item.UpdatedDate != null)
-                        {
-                            updatedDate = Convert.ToDateTime(item.UpdatedDate).ToString("dd/MM/yyyy HH:mm:ss");
-                        }
-                    }
-                    @Html.DisplayFor(modelItem => updatedDate)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.VendorName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MilkType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MilkValue)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FatValue)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Total)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedBy)
+    </td>
+    <td>
+        @{ string createdDate = Convert.ToDateTime(item.CreatedDate).ToString("dd/MM/yyyy HH:mm:ss"); }
+        @Html.DisplayFor(modelItem => createdDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UpdateBy)
+    </td>
+    <td>
+        @{ string updatedDate = string.Empty;
+            if (item.UpdatedDate != null)
+            {
+                updatedDate = Convert.ToDateTime(item.UpdatedDate).ToString("dd/MM/yyyy HH:mm:ss");
+            } }
+        @Html.DisplayFor(modelItem => updatedDate)
+    </td>
+    <th>
+        @{ 
+            if (item.MoneyPaid)
+            {
+                <span>Yes</span>
+            }
+            else
+            {
+                <span>No</span>
+            }
         }
+    </th>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>}
     </tbody>
 </table>

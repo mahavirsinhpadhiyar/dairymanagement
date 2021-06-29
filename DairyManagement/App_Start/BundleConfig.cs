@@ -33,6 +33,9 @@ namespace DairyManagement
             bundles.Add(new StyleBundle("~/Content/bootstrapdatatablecss").Include(
                       "~/Content/dataTables.bootstrap.min.css",
                       "~/Content/responsive.bootstrap.min.css"));
+
+            //bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
+            //            "~/Scripts/jquery-ui.js"));
         }
     }
 }

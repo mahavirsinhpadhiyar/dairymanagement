@@ -33,7 +33,8 @@ namespace DairyManagement.Controllers
                 Price = m.Price,
                 Total = m.Total,
                 VendorName = m.VendorInfo.VendorName,
-                MilkType = m.MilkType.MilkType1
+                MilkType = m.MilkType.MilkType1,
+                MoneyPaid = m.MoneyPaid
             }).ToList();
             return View(vendorList.ToList());
         }
@@ -62,6 +63,7 @@ namespace DairyManagement.Controllers
             vendorMilkViewModel.CreatedDate = vendorMilk.CreatedDate;
             vendorMilkViewModel.UpdatedDate = vendorMilk.UpdatedDate;
             vendorMilkViewModel.VendorName = vendorMilk.VendorInfo.VendorName;
+            vendorMilkViewModel.MoneyPaid = vendorMilk.MoneyPaid;
 
             return View(vendorMilkViewModel);
         }
@@ -88,6 +90,7 @@ namespace DairyManagement.Controllers
             vendorMilkViewModel.CreatedDate = vendorMilk.CreatedDate;
             vendorMilkViewModel.UpdatedDate = vendorMilk.UpdatedDate;
             vendorMilkViewModel.VendorName = vendorMilk.VendorInfo.VendorName;
+            vendorMilkViewModel.MoneyPaid = vendorMilk.MoneyPaid;
 
             return View(vendorMilkViewModel);
         }
@@ -145,7 +148,8 @@ namespace DairyManagement.Controllers
                     MilkValue = vendorMilkViewModel.MilkValue,
                     Price = vendorMilkViewModel.Price,
                     Total = vendorMilkViewModel.Total,
-                    VendorId = vendorMilkViewModel.VendorId
+                    VendorId = vendorMilkViewModel.VendorId,
+                    MoneyPaid = vendorMilkViewModel.MoneyPaid
                 });
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -189,6 +193,7 @@ namespace DairyManagement.Controllers
             vendorMilkViewModel.UpdateBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.UpdatedBy)?.FirstName;
             vendorMilkViewModel.CreatedDate = vendorMilk.CreatedDate;
             vendorMilkViewModel.UpdatedDate = vendorMilk.UpdatedDate;
+            vendorMilkViewModel.MoneyPaid = vendorMilk.MoneyPaid;
             vendorMilkViewModel.MilkTypeList = db.MilkTypes.ToList().Select(m => new SelectListItem()
             {
                 Text = m.MilkType1,
@@ -226,6 +231,7 @@ namespace DairyManagement.Controllers
             vendorMilkViewModel.UpdateBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.UpdatedBy)?.FirstName;
             vendorMilkViewModel.CreatedDate = vendorMilk.CreatedDate;
             vendorMilkViewModel.UpdatedDate = vendorMilk.UpdatedDate;
+            vendorMilkViewModel.MoneyPaid = vendorMilk.MoneyPaid;
             vendorMilkViewModel.MilkTypeList = db.MilkTypes.ToList().Select(m => new SelectListItem()
             {
                 Text = m.MilkType1,
@@ -263,6 +269,7 @@ namespace DairyManagement.Controllers
                 vendorMilk.Total = vendorMilkViewModel.Total;
                 vendorMilk.UpdatedDate = DateTime.Now;
                 vendorMilk.UpdatedBy = 1;
+                vendorMilk.MoneyPaid = vendorMilkViewModel.MoneyPaid;
 
                 db.Entry(vendorMilk).State = EntityState.Modified;
                 db.SaveChanges();
@@ -303,6 +310,7 @@ namespace DairyManagement.Controllers
             vendorMilkViewModel.UpdateBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.UpdatedBy)?.FirstName;
             vendorMilkViewModel.UpdatedDate = vendorMilk.UpdatedDate;
             vendorMilkViewModel.CreatedDate = vendorMilk.CreatedDate;
+            vendorMilkViewModel.MoneyPaid = vendorMilk.MoneyPaid;
 
             if (vendorMilk == null)
             {
@@ -331,6 +339,7 @@ namespace DairyManagement.Controllers
             vendorMilkViewModel.UpdateBy = db.UserInfoes.FirstOrDefault(q => q.Id == vendorMilk.UpdatedBy)?.FirstName;
             vendorMilkViewModel.UpdatedDate = vendorMilk.UpdatedDate;
             vendorMilkViewModel.CreatedDate = vendorMilk.CreatedDate;
+            vendorMilkViewModel.MoneyPaid = vendorMilk.MoneyPaid;
 
             if (vendorMilk == null)
             {

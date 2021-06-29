@@ -138,9 +138,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\CustomAuthorize.cs" />
-    <Compile Include="Migrations\202103080723258_initialset.cs" />
-    <Compile Include="Migrations\202103080723258_initialset.Designer.cs">
-      <DependentUpon>202103080723258_initialset.cs</DependentUpon>
+    <Compile Include="Migrations\202106210500146_initial.cs" />
+    <Compile Include="Migrations\202106210500146_initial.Designer.cs">
+      <DependentUpon>202106210500146_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106292050502_addMoneyPaidFlagVendorMilkDetail.cs" />
+    <Compile Include="Migrations\202106292050502_addMoneyPaidFlagVendorMilkDetail.Designer.cs">
+      <DependentUpon>202106292050502_addMoneyPaidFlagVendorMilkDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DMDBContext.cs" />
@@ -159,48 +163,6 @@
     <Compile Include="Models\Entities\VendorInfo.cs" />
     <Compile Include="Models\Entities\VendorMilkInfo.cs" />
     <Compile Include="Models\Enums.cs" />
-    <Compile Include="Models\LiveDBEDMX\AccountDetail.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\AccountDetailsLastRealStock.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\AccountSP.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\DairyManagementLive.Context.cs">
-      <DependentUpon>DairyManagementLive.Context.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\DairyManagementLive.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\DairyManagementLive.Designer.cs">
-      <DependentUpon>DairyManagementLive.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\EmployeeDetail.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\EmployeeVaaraDetail.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\MilkType.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\UserInfo.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\VendorInfo.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LiveDBEDMX\VendorMilkInfo.cs">
-      <DependentUpon>DairyManagementLive.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Accounts\AccountsVM.cs" />
     <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
@@ -367,25 +329,13 @@
     <Content Include="Content\bootstraplogin.min.css" />
     <Content Include="Content\dataTables.bootstrap.min.css" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\responsive.bootstrap.min.css" />
     <Content Include="Content\signin.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\LiveDBEDMX\DairyManagementLive.Context.tt">
-      <DependentUpon>DairyManagementLive.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DairyManagementLive.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\LiveDBEDMX\DairyManagementLive.edmx.diagram">
-      <DependentUpon>DairyManagementLive.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\LiveDBEDMX\DairyManagementLive.tt">
-      <DependentUpon>DairyManagementLive.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DairyManagementLive.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\css\propeller.min.css.map" />
@@ -465,13 +415,17 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.datetimepicker.full.js" />
+    <Content Include="Scripts\jquery.datetimepicker.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PageScripts\Account.js" />
+    <Content Include="Scripts\PageScripts\EmployeeToMilkCustomer.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\util.js" />
     <Content Include="themes\css\propeller-admin.css" />
@@ -569,7 +523,6 @@
     <Folder Include="components\get-started\" />
     <Folder Include="components\toggle-switch\js\" />
     <Folder Include="components\tooltip\js\" />
-    <Folder Include="Models\LocalDBEDMX\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -588,14 +541,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\LiveDBEDMX\DairyManagementLive.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DairyManagementLive.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202103080723258_initialset.resx">
-      <DependentUpon>202103080723258_initialset.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202106210500146_initial.resx">
+      <DependentUpon>202106210500146_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106292050502_addMoneyPaidFlagVendorMilkDetail.resx">
+      <DependentUpon>202106292050502_addMoneyPaidFlagVendorMilkDetail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

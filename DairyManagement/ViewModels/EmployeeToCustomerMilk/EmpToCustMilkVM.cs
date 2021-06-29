@@ -15,6 +15,7 @@ namespace DairyManagement.ViewModels.EmployeeToCustomerMilk
         public Enums.CustomerMilkType MilkType { get; set; }
         [Display(Name = "Milk Value")]
         public decimal MilkGiven { get; set; }
+        [Display(Name = "તારીખ")]
         public DateTime Date { get; set; }
         [Display(Name = "Customer")]
         public Nullable<int> CustomerId { get; set; }

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Account List</h2>
+<h2>Customer Milk List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -37,7 +37,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Date.ToString("dd/mm/yyyy"))
+                    @Html.Raw(item.Date.ToString("dd/MM/yyyy HH:mm"))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EmployeeName)
@@ -52,8 +52,7 @@
                     @Html.DisplayFor(modelItem => item.MilkType)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Edit", "Create", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>

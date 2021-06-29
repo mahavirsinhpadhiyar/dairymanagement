@@ -16,6 +16,7 @@ namespace DairyManagement.Models.Entities
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public virtual UserInfo UserInfo1 { get; set; }
         public virtual UserInfo UserInfo { get; set; }
+        public bool MoneyPaid { get; set; }
 
         //Foreign key for Vendor Info
 

@@ -26,6 +26,8 @@ namespace DairyManagement.ViewModels.VendorMilk
         [Display(Name = "Price (Per Litre)")]
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> Total { get; set; }
+        [Display(Name = "પૈસા ચૂકવ્યા")]
+        public bool MoneyPaid { get; set; }
         [Display(Name = "Created By")]
         public string CreatedBy { get; set; }
         [Display(Name = "Updated By")]
