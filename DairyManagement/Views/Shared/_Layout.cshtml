@@ -44,6 +44,7 @@
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -53,9 +54,13 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/datatable")
+    @*@Scripts.Render("~/bundles/datatable")*@
     @Scripts.Render("~/bundles/bootstrap")
     @*@Scripts.Render("~/bundles/jquery-ui")*@
+
+    <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+
     @RenderSection("scripts", required: false)
 
     <script>
@@ -63,8 +68,7 @@
             $("input:text").focus(function () { $(this).select(); });
         });
 
-        function SelectAllText(obj)
-        {
+        function SelectAllText(obj) {
             $(obj).select();
         }
         $('.dairyDynamicDatatable').DataTable({
